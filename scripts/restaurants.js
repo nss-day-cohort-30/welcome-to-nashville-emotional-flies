@@ -1,13 +1,32 @@
-const userInput = "Burger"
+const userInput = "Mexican"
+// let search = document.querySelector("#restaurantsByFoodType").value
 
+// let search = document.querySelector("restaurantsByFoodType").value
 
-fetch("https://developers.zomato.com/api/v2.1/search?entity_id=1138&entity_type=city&apikey=f3c493d118f4b2a20a5298e22cb4f499")
+let search = "Burger"
+
+fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=1138&entity_type=city&q=${search}&apikey=f3c493d118f4b2a20a5298e22cb4f499`)
+
     .then(restaurants => restaurants.json())
     .then(parsedRestaurants => {
-       console.log(parsedRestaurants.restaurants.forEach (restaurant => 
-        const restaurantList = restaurants(restaurant)
-         )
+        for (let i = 0; i < parsedRestaurants.restaurants.length; i++) {
+            const currentRestaurant = parsedRestaurants.restaurants[i];
+            let name = currentRestaurant.restaurant.name
+            let address = currentRestaurant.restaurant.location.address
+            let cuisine = currentRestaurant.restaurant.cuisines
+            let rating = currentRestaurant.restaurant.user_rating.aggregate_rating
+            let menu = currentRestaurant.restaurant.menu_url
+            if (cuisine.includes(search)) {
+                console.log(name)
+                console.log(address)
+                console.log(rating)
+                console.log(menu)
+            }
+        }
+
     })
+
+
 
 
 
@@ -21,12 +40,7 @@ fetch("https://developers.zomato.com/api/v2.1/search?entity_id=1138&entity_type=
         // })
     // })
 
-    //function into the input button 20-30 cuisine options
-    //that will feed into a url fetch via string interpolation?
-    //fetch similar cuisines with locations
-    //incorporates 
-
-    //will I need to string interpolate the URL?
+  
 
 
 
