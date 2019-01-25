@@ -1,8 +1,11 @@
 //add event listener for meetUpsSearch to accept the user input and pass it to the eventSearch variable
 document.getElementById("meetUpsSearch").addEventListener("click", function meetUpsSearchHandlerFunction(event){
+    
+    let eventSearch =document.getElementById("meetUpsByTopic").value
+    if (eventSearch === "") {
+        alert("Please enter valid search criteria")
+    }
        
-let eventSearch = document.getElementById("meetUpsByTopic").value
-
 //fetch with string interpolation of user input 
 fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location.address=nashville&token=CZNRMRCYSJLQZ7VBULG2`, {
     headers: {
