@@ -1,30 +1,41 @@
-const userInput = "Mexican"
-// let search = document.querySelector("#restaurantsByFoodType").value
+//creates variable that holds the #restaurantSearch button
+const restaurantSearchButton = document.querySelector("#restaurantSearch")
 
-// let search = document.querySelector("restaurantsByFoodType").value
-
-let search = "Burger"
-
-fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=1138&entity_type=city&q=${search}&apikey=f3c493d118f4b2a20a5298e22cb4f499`)
-
+//adds event listen to the button that listens for the click then invokes the function
+restaurantSearchButton.addEventListener("click", (event) => {
+    //search variable takes the value of the input field 
+    let search = document.querySelector("#restaurantsByFoodType").value
+    
+    if (search === "") {
+        alert("Please enter valid restaurant")
+    }
+    //had to put fetch inside of the function, otherwise it wouldn't know
+    //where to put the value of the input
+    fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=1138&entity_type=city&q=${search}&apikey=f3c493d118f4b2a20a5298e22cb4f499`)
     .then(restaurants => restaurants.json())
     .then(parsedRestaurants => {
         for (let i = 0; i < parsedRestaurants.restaurants.length; i++) {
-            const currentRestaurant = parsedRestaurants.restaurants[i];
-            currentRestaurant.name = currentRestaurant.restaurant.name
-            currentRestaurant.address = currentRestaurant.restaurant.location.address
-            currentRestaurant.cuisine = currentRestaurant.restaurant.cuisines
-            currentRestaurant.rating = currentRestaurant.restaurant.user_rating.aggregate_rating
+        const currentRestaurant = parsedRestaurants.restaurants[i];
+        //takes objects and turns them into variables
+        currentRestaurant.name = currentRestaurant.restaurant.name
+        currentRestaurant.address = currentRestaurant.restaurant.location.address
+        currentRestaurant.cuisine = currentRestaurant.restaurant.cuisines
+        currentRestaurant.rating = currentRestaurant.restaurant.user_rating.aggregate_rating
+        //if the currentRestaurant has a cuisine object that is included in the user input's search THEN 
             if (currentRestaurant.cuisine.includes(search)) {
-                const restaurantHTML = restaurantList(currentRestaurant)
-                printRestaurants(restaurantHTML)
+                //creates a variable that stores the HTML DOM Representation Function and takes the 
+                //object currentRestaurant as an argument
+            const restaurantHTML = restaurantList(currentRestaurant)
+            //calls on the function printRestaurants with the arugment of restaurantHTML
+            printRestaurants(restaurantHTML)
             }
         }
     })
+})
 
 
 const restaurantList = restaurant => {
-  return `
+    return `
   <div class="restaurant result">
       <p><strong>${restaurant.name}</strong>: ${restaurant.address}</p>
       <p>Rating: ${restaurant.rating}</p>
@@ -34,7 +45,8 @@ const restaurantList = restaurant => {
 }
 
 const printRestaurants = restaurantHTML => {
-  document.querySelector("#restaurantResults").innerHTML += restaurantHTML
+    document.querySelector("#restaurantResults").innerHTML += restaurantHTML
 }
 
-document.querySelector("#restaurantsByFoodType").addEventListener("click", )
+
+
