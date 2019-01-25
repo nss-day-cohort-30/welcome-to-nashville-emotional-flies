@@ -11,68 +11,29 @@ fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=1138&entity_type=
     .then(parsedRestaurants => {
         for (let i = 0; i < parsedRestaurants.restaurants.length; i++) {
             const currentRestaurant = parsedRestaurants.restaurants[i];
-            let name = currentRestaurant.restaurant.name
-            let address = currentRestaurant.restaurant.location.address
-            let cuisine = currentRestaurant.restaurant.cuisines
-            let rating = currentRestaurant.restaurant.user_rating.aggregate_rating
-            let menu = currentRestaurant.restaurant.menu_url
-            if (cuisine.includes(search)) {
-                console.log(name)
-                console.log(address)
-                console.log(rating)
-                console.log(menu)
+            currentRestaurant.name = currentRestaurant.restaurant.name
+            currentRestaurant.address = currentRestaurant.restaurant.location.address
+            currentRestaurant.cuisine = currentRestaurant.restaurant.cuisines
+            currentRestaurant.rating = currentRestaurant.restaurant.user_rating.aggregate_rating
+            if (currentRestaurant.cuisine.includes(search)) {
+                const restaurantHTML = restaurantList(currentRestaurant)
+                printRestaurants(restaurantHTML)
             }
         }
-
     })
 
 
+const restaurantList = restaurant => {
+  return `
+  <div class="restaurant result">
+      <p><strong>${restaurant.name}</strong>: ${restaurant.address}</p>
+      <p>Rating: ${restaurant.rating}</p>
+      <button class="save">Save</button>
+  </div>
+  `
+}
 
 
-
-
-        // const restaurantList = parsedRestaurants.restaurants[0]
-        // console.log(restaurantList)
-
-        // forEach(restaurant => {
-        //     const restaurantCuisine = restaurant.cuisine(restaurant)
-        //     console.log(parsedRestaurants)
-        // })
-    // })
-
-  
-
-
-
-
-        // const allRestaurants = parsedRestaurants.restaurants[0].restaurant.cuisines
-        // //create function that loops through the restaurants 
-        // //create function that loops through the restaurant to find the selected cuisine
-        // console.table(allRestaurants)
-
-
-       // //create function that loops through the restaurants 
-        // //create function that loops through the restaurant to find the selected cuisine
-        // console.table(allRestaurants)
-
-    // let cuisineResults = parsedRestaurants.restaurant.cuisines
-    // console.table(cuisineResults)
-
-//     parsedRestaurants.forEach(restaurant => {
-//         const restaurantHTML = restaurantList(restaurant)
-//         printRestaurants(restaurantHTML)
-
-//     })
-
-// const restaurantList = jsonCompletedRestaurants => {
-//   return `
-//   <article class="restaurantList">
-//       <h1>${jsonCompletedRestaurants.name}</h1>
-//       <section>${jsonCompletedRestaurants.location}</section>
-//   </article>
-//   `
-// }
-
-// const printRestaurants = restaurantHTML => {
-//   document.querySelector(".restaurantList").innerHTML += restaurantHTML
-// }
+const printRestaurants = restaurantHTML => {
+  document.querySelector("#restaurantResults").innerHTML += restaurantHTML
+}
