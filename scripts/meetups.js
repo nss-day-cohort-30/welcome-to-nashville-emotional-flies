@@ -1,5 +1,8 @@
-//this will take in user input
-let eventSearch = "dog"
+//add event listener for meetUpsSearch to accept the user input and pass it to the eventSearch variable
+document.getElementById("meetUpsSearch").addEventListener("click", function meetUpsSearchHandlerFunction(event){
+       
+let eventSearch = document.getElementById("meetUpsByTopic").value
+
 //fetch with string interpolation of user input 
 fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location.address=nashville&token=CZNRMRCYSJLQZ7VBULG2`, {
     headers: {
@@ -9,7 +12,7 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
 })
     .then(response => response.json())
     .then(entries => {
-        console.log(entries)
+        
        for (let i = 0; i < entries.events.length; i++) {
            let currentEvent = entries.events[i]
         
@@ -22,6 +25,8 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
            
        }
     }) 
+})
+
     //Function for HTML Representation
     let HTMLRepresentation = (meetupRepresentation) => {
            return `
@@ -37,6 +42,4 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
      //Function to add to DOM
     const addToDOM = (meetupHTML) => {
         linkMeetup.innerHTML += meetupHTML;
-    }
-
-    
+    }    
