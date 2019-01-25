@@ -13,20 +13,13 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
        for (let i = 0; i < entries.events.length; i++) {
            let eventName = entries.events[i].name.text
            
-           let eventDescription = entries.events[i].description.text
-
            let eventLocation =;
 
            let eventStartDTG = entries.events[i].start.local
 
-           let eventEndDTG = entries.events[i].end.local
+        //    let eventEndDTG = entries.events[i].end.local
         console.log(eventDateTime)
        }
     }) 
     
-    // function loopEntries (entry){       
-            
-    //         console.log(meet.topic)
-    //     }
-    // }
-    // loopEntries(entries) 
+    
