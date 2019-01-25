@@ -16,6 +16,8 @@ concertButton.addEventListener('click', (event) => {
   .then(entries => {
     // console.log(entries)
   let entriesList = entries._embedded.events;
+  //  console.log(entriesList);
+  // add if statement!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
     for (let index = 0; index < entriesList.length; index++) {
     const currentEvent= entriesList[index];
@@ -34,6 +36,8 @@ concertButton.addEventListener('click', (event) => {
 //
 
 
+
+
 const concertBuilder = (entry) => {
         return `
         <div class="concert result">
@@ -49,6 +53,7 @@ const concertBuilder = (entry) => {
     const concertAdder = (concertHTML) => {
         concertEl.innerHTML += concertHTML;
     }
+
 
 
 
