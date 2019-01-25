@@ -10,6 +10,8 @@ fetch(address)
     .then(parsedParks => {
         
         parsedParks.forEach(park => {
+            parkName = park.park_name;
+            parkAddress = park.mapped_location_address;
             let parkHTML = parkBuilder(park);
             parkAdder(parkHTML);
         })
@@ -21,7 +23,7 @@ fetch(address)
     const parkBuilder = (park) => {
         return `
         <div class="park result">
-        <p><strong>${park.park_name}</strong>: ${park.mapped_location_address}</p>
+        <p><strong>${parkName}</strong>: ${parkAddress}</p>
         <button class="save">Save</button>
         </div>
         `
