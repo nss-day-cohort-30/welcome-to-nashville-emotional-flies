@@ -5,6 +5,7 @@ fetch("https://developers.zomato.com/api/v2.1/search?entity_id=1138&entity_type=
     .then(restaurants => restaurants.json())
     .then(parsedRestaurants => {
        console.log(parsedRestaurants.restaurants.forEach (restaurant => 
+        const restaurantList = restaurants(restaurant)
          )
     })
 
