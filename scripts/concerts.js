@@ -14,13 +14,34 @@ let entriesList = entries._embedded.events;
    artist = currentEvent.name;
   //  console.log(artist)
    venue = currentEvent._embedded.venues[0].name;
-   console.log(venue)
+  //  console.log(venue)
+  let concertHTML = concertBuilder(currentEvent)
+  concertAdder(concertHTML);
   }
   
 })
 
 
 
+
+const concertBuilder = (entry) => {
+        return `
+        <div class="concert result">
+        <p><strong>${artist}</strong>: ${venue}</p>
+        <button class="save">Save</button>
+        </div>
+        `
+    }
+
+
+
+
+
+    const concertEl = document.querySelector("#concertResults"); 
+    
+    const concertAdder = (concertHTML) => {
+        concertEl.innerHTML += concertHTML;
+    }
 
 
 
