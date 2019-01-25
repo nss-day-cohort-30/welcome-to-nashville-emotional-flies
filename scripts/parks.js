@@ -1,7 +1,3 @@
-let userInputParks;
-let address;
-
-
 // Add event listener to park search button.
 // It will capture user input and place it into userInput variable to be used in the fetch address
 
@@ -11,12 +7,9 @@ parkSearchButton.addEventListener("click", (event) => {
 
     // Capture user input and place it into the address to be fetched
 
-    userInputParks = document.querySelector("#parksByFeature").value
+    let userInputParks = document.querySelector("#parksByFeature").value
 
-    
-
-
-    address = `https://data.nashville.gov/resource/xbru-cfzi.json?${userInputParks}=Yes&$$app_token=5twx5LXsJSU43JWk9L2RZ1g5H`;
+    let address = `https://data.nashville.gov/resource/xbru-cfzi.json?${userInputParks}=Yes&$$app_token=5twx5LXsJSU43JWk9L2RZ1g5H`;
     
    
     // Fetch all parks data that matches user input
