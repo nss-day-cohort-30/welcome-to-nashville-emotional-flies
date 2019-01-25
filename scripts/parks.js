@@ -8,8 +8,6 @@ const address = `https://data.nashville.gov/resource/xbru-cfzi.json?${userInputP
 fetch(address)
     .then(parks => parks.json())
     .then(parsedParks => {
-        let counter = 0
-        // Iterate over parks, returning those with "Yes" value for the user input category
         
         parsedParks.forEach(park => {
             let parkHTML = parkBuilder(park);
