@@ -1,25 +1,39 @@
- fetch('https://app.ticketmaster.com/discovery/v2/events.json?&stateCode=TN&city=nashville&keyword=music&startDateTime=2019-01-25T06:00:00Z&endDateTime=2019-01-26T06:00:00Z&apikey=EWtvotYiyT2TazNiuuVXyFzKcOSeWxHE')
+// let genre = 'country'
+ 
+let concertButton = document.getElementById('concertButton') 
+let concertInput = document.getElementById('concertsByGenre');
+
+// event Listener 
+
+
+concertButton.addEventListener('click', (event) => {
+  let genre = concertInput.value
+  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?&stateCode=TN&city=nashville&classificationName=${genre}&startDateTime=2019-01-25T06:00:00Z&endDateTime=2019-01-30T06:00:00Z&apikey=EWtvotYiyT2TazNiuuVXyFzKcOSeWxHE`)
 
 
 
-.then(response => response.json())
-.then(entries => {
-  // console.log(entries)
-let entriesList = entries._embedded.events;
+  .then(response => response.json())
+  .then(entries => {
+    // console.log(entries)
+  let entriesList = entries._embedded.events;
+  //  console.log(entriesList);
+  // add if statement!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
-  for (let index = 0; index < entriesList.length; index++) {
-   const currentEvent= entriesList[index];
-  //  console.log(currentEvent);
+    for (let index = 0; index < entriesList.length; index++) {
+    const currentEvent= entriesList[index];
+    //  console.log(currentEvent);
 
-   artist = currentEvent.name;
-  //  console.log(artist)
-   venue = currentEvent._embedded.venues[0].name;
-  //  console.log(venue)
-  let concertHTML = concertBuilder(currentEvent)
-  concertAdder(concertHTML);
-  }
-  
+    artist = currentEvent.name;
+    //  console.log(artist)
+    venue = currentEvent._embedded.venues[0].name;
+    //  console.log(venue)
+    let concertHTML = concertBuilder(currentEvent)
+    concertAdder(concertHTML);
+    }
+    
+  })
 })
+//
 
 
 
@@ -34,14 +48,15 @@ const concertBuilder = (entry) => {
     }
 
 
-
-
-
     const concertEl = document.querySelector("#concertResults"); 
     
     const concertAdder = (concertHTML) => {
         concertEl.innerHTML += concertHTML;
     }
+
+
+
+
 
 
 
