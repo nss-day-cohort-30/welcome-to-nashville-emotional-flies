@@ -33,7 +33,8 @@ const restaurantList = restaurant => {
   `
 }
 
-
 const printRestaurants = restaurantHTML => {
   document.querySelector("#restaurantResults").innerHTML += restaurantHTML
 }
+
+document.querySelector("#restaurantsByFoodType").addEventListener("click", )
