@@ -34,7 +34,7 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
     let HTMLRepresentation = (meetupRepresentation) => {
            return `
             <div class="meetup results">
-            <p><strong>${eventName}</strong>: ${eventStartDTG}</p>
+            <p><strong>${eventName}</strong>: Date: ${eventStartDTG.split("T")[0] + " Time: "}${eventStartDTG.slice(11, 16 )}</p>
             <button class="save">Save</button>
             </div>
             `        
