@@ -84,6 +84,6 @@ const restaurantItineraryHTML = (restaurantSaved => {
 
 //adds new div with selected itinerary item to the DOM 
 const addsRestaurantToItinerary = (restaurantItineraryHTML) => {
-    itineraryResults.innerHTML = restaurantItineraryHTML; //used to be += but in order to REPLACE THE CURRENT ITINERARY set it to = for only current itinerary
+    itineraryResults.innerHTML += restaurantItineraryHTML; //used to be += but in order to REPLACE THE CURRENT ITINERARY set it to = for only current itinerary
 }
 

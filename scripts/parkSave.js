@@ -35,5 +35,5 @@ const parkItineraryBuilder = (parkToSave) => {
 
 // Function to add new div to itinerary list
 const parkItineraryAdder = (parkHTML) => {
-    itineraryEl.innerHTML = parkHTML;
+    itineraryEl.innerHTML += parkHTML;
 }

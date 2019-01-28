@@ -102,7 +102,7 @@ concertEl.addEventListener("click", () => {
     // adding new tag to Itinerary 
 
     const concertItineraryHTML = (concertSaved) => {
-      itineraryEl.innerHTML = concertSaved;
+      itineraryEl.innerHTML += concertSaved;
     }
 
     let savedCon = concertItineraryBuiler(concertSaved);
