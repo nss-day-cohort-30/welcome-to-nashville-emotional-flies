@@ -19,7 +19,7 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
 })
     .then(response => response.json())
     .then(entries => {
-        console.log(entries)
+       
         if (entries.events.length === 0) {
             alert("No results for your search criteria")
         }  
