@@ -92,6 +92,7 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
     }    
     // //Function to add to DOM itinerary
     const additineraryToDOM = (taco) => {
+        //use += to continue adding on each click or use - to only selct the most recent save
         linkItineraryToHTML.innerHTML = taco;
     } 
     
