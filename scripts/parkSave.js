@@ -4,14 +4,16 @@
 const itineraryEl = document.querySelector("#itinerary");
 
 
+// Add event listener to park results container
+
 parksEl.addEventListener("click", () => {
     
     // Check that item clicked is a save button
 
     if (event.target.className === "save") {
-    
+
         let buttonClicked = event.target;
-        let parkToSave = buttonClicked.previousElementSibling.textContent.split(":")[0];
+        let parkToSave = buttonClicked.previousElementSibling.textContent.split(":")[0];  // When save button is clicked, corresponding
         
         let parkItineraryHTML = parkItineraryBuilder(parkToSave);
         parkItineraryAdder(parkItineraryHTML);
@@ -20,17 +22,18 @@ parksEl.addEventListener("click", () => {
         parksEl.innerHTML = "";
 
     }
-
 });
 
 // Function to build HTML representation of new itinerary item
 const parkItineraryBuilder = (parkToSave) => {
     return `
-    <div class="itineraryItem">Park: ${parkToSave}</div>
+    <div id="park" class="park itineraryItem">
+    <p>Park: ${parkToSave}</p>
+    </div>
     `
 }
 
 // Function to add new div to itinerary list
 const parkItineraryAdder = (parkHTML) => {
-    itineraryEl.innerHTML += parkHTML;
+    itineraryEl.innerHTML = parkHTML;
 }
