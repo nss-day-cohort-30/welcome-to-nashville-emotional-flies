@@ -54,9 +54,10 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
         let meetUpSelected = event.target
         //selects the name of the event
         let addMeetupToitinerary = meetUpSelected.previousSibling.previousElementSibling.firstChild.innerText
-
+        // the HTMLLinkItin variable is used for the function add to dom itinerary element
        let HTMLLinkItin = HTMLRepresentationForSelectedEvent(addMeetupToitinerary)
        additineraryToDOM(HTMLLinkItin)
+       linkMeetup.innerHTML = "";
     }
         
     })
@@ -78,3 +79,4 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
     const additineraryToDOM = (meetupHTML) => {
         linkItineraryToHTML.innerHTML += meetupHTML;
     } 
+    //
