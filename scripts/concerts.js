@@ -76,7 +76,7 @@ const concertAdder = (concertHTML) => {
 
 
 
-const concertItinerary = document.querySelector("#itinerary");
+const concertItinerary = document.querySelector("#concertItinerary");
 
 
 
@@ -86,6 +86,7 @@ concertEl.addEventListener("click", () => {
 
 
   if (event.target.className === "save") {
+    document.querySelector("#concertItinerary").innerHTML = "";
 
 
     let concertSaved = event.target.previousElementSibling.textContent.split(":")[0];
@@ -102,7 +103,7 @@ concertEl.addEventListener("click", () => {
     // adding new tag to Itinerary 
 
     const concertItineraryHTML = (concertSaved) => {
-      itineraryEl.innerHTML = concertSaved;
+      concertItinerary.innerHTML = concertSaved;
     }
 
     let savedCon = concertItineraryBuiler(concertSaved);

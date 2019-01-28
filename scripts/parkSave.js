@@ -1,7 +1,7 @@
 // Add event listener to save buttons
 // When clicked, it will send the park name to the itinerary and remove the parks results from the page
 
-const itineraryEl = document.querySelector("#itinerary");
+const parkItineraryEl = document.querySelector("#parkItinerary");
 
 
 // Add event listener to park results container
@@ -12,15 +12,18 @@ parksEl.addEventListener("click", () => {
 
     if (event.target.className === "save") {
 
+        document.querySelector("#parkItinerary").innerHTML = "";
+            
         let buttonClicked = event.target;
         let parkToSave = buttonClicked.previousElementSibling.textContent.split(":")[0];  // When save button is clicked, corresponding
-        
+            
         let parkItineraryHTML = parkItineraryBuilder(parkToSave);
         parkItineraryAdder(parkItineraryHTML);
 
         // Remove park search results
         parksEl.innerHTML = "";
 
+        
     }
 });
 
@@ -35,5 +38,5 @@ const parkItineraryBuilder = (parkToSave) => {
 
 // Function to add new div to itinerary list
 const parkItineraryAdder = (parkHTML) => {
-    itineraryEl.innerHTML = parkHTML;
+    parkItineraryEl.innerHTML = parkHTML;
 }
