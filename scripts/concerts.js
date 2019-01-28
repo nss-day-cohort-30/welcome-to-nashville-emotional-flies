@@ -33,6 +33,11 @@ concertButton.addEventListener('click', (event) => {
     //  console.log(artist)
     venue = currentEvent._embedded.venues[0].name;
     //  console.log(venue)
+
+    address = currentEvent._embedded.venues[0].address.line1; 
+
+    console.log(address);
+
     let concertHTML = concertBuilder(currentEvent)
     concertAdder(concertHTML);
     }
@@ -47,7 +52,7 @@ concertButton.addEventListener('click', (event) => {
 const concertBuilder = (entry) => {
         return `
         <div class="concert result">
-        <p><strong>${artist}</strong>: ${venue}</p>
+        <p><strong>${artist}</strong>: ${address}</p>
         <button class="save">Save</button>
         </div>
         `
