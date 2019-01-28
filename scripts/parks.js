@@ -5,6 +5,8 @@ const parkSearchButton = document.querySelector("#parkSearch");
 
 parkSearchButton.addEventListener("click", (event) => {
 
+let counter = 0;
+
     // Capture user input and place it into the address to be fetched
 
     let userInputParks = document.querySelector("#parksByFeature").value.toLowerCase().replace(" ", "_");
@@ -19,7 +21,8 @@ parkSearchButton.addEventListener("click", (event) => {
         .then(parsedParks => {
             
             parsedParks.forEach(park => {
-                parkName = park.park_name;
+                counter++;
+                parkName = counter + ". " + park.park_name;
                 parkAddress = park.mapped_location_address;
                 let parkHTML = parkBuilder(park);
                 parkAdder(parkHTML);
@@ -29,6 +32,7 @@ parkSearchButton.addEventListener("click", (event) => {
 
     
 // Function to build HTML representation of park
+
 
 const parkBuilder = (park) => {
     return `
