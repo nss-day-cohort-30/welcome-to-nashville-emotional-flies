@@ -89,24 +89,3 @@ parksEl.addEventListener("click", () => {
 });
 
 
-
-
-
-
-
-// Function to build HTML representation of new itinerary item   **** NOT WORKING when in global scope
-
-// const parkItineraryBuilder = (park) => {
-//     return `
-//     <div class="itineraryItem">Park: ${parkToSave}</div>
-//     `
-// }
-
-
-// Function to add new div to itinerary list
-
-// const itineraryEl = document.querySelector("#itinerary");
-
-// const parkItineraryAdder = (parkHTML) => {
-//     itineraryEl.innerHTML += parkHTML;
-// }
