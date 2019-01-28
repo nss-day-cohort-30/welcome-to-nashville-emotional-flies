@@ -1,0 +1,19 @@
+.header h1 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 225px;
+    width: 900px;
+    background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/nashville-skyline-at-dusk-2018-1-to-4-ratio-panorama-color-jon-holiday.jpg")
+}
+
+body {
+    background-color: #ECD2FE;
+    width: 900px;
+    margin: auto;
+}
+
+input {
+    margin: 5px;
+    border-radius: 2px;
+}
