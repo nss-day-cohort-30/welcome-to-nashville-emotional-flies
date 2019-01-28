@@ -20,7 +20,7 @@ restaurantSearchButton.addEventListener("click", (event) => {
     fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=1138&entity_type=city&q=${search}&apikey=f3c493d118f4b2a20a5298e22cb4f499`)
         .then(restaurants => restaurants.json())
         .then(parsedRestaurants => {
-            if (parsedRestaurants.restaurants.length === 0) { //if this didn't work I could use a .catch after last .then
+            if (parsedRestaurants.restaurants.length === 0) { //if this didn't work I could use a .catch after last .theng
                 alert("Please, enter valid cuisine. Ya know you want to. Youz so hungry.")
             } else {
                 for (let i = 0; i < parsedRestaurants.restaurants.length; i++) {
@@ -75,7 +75,7 @@ restaurantResults.addEventListener("click", (event) => {
 // Function that builds HTML representation of new itinerary item(restaurantSaved)
 const restaurantItineraryHTML = (restaurantSaved => {
     return `
-            <div class="itineraryRestaurant">
+            <div id="restaurant" class="itineraryRestaurant">
             <p>Restaurant: ${restaurantSaved}</p>
             </div>
 
@@ -84,6 +84,6 @@ const restaurantItineraryHTML = (restaurantSaved => {
 
 //adds new div with selected itinerary item to the DOM 
 const addsRestaurantToItinerary = (restaurantItineraryHTML) => {
-    itineraryResults.innerHTML = restaurantItineraryHTML; //used to be += but in order to REPLACE THE CURRENT ITINERARY set it to = for only current itinerary
+    itineraryResults.innerHTML += restaurantItineraryHTML; //used to be += but in order to REPLACE THE CURRENT ITINERARY set it to = for only current itinerary
 }
 
