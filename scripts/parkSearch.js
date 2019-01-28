@@ -24,9 +24,9 @@ parkSearchButton.addEventListener("click", (event) => {
             })
         })
         // If user input returns no results, display error message
-        // .catch( error => {
-        //     alert("This is not a valid park feature")
-        //   })
+        .catch( error => {
+            alert("This is not a valid park feature")
+          })
 });
 
     
