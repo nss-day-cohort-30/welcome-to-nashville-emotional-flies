@@ -24,7 +24,7 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
             alert("No results for your search criteria")
         }  
         
-        else{
+    else{
        for (let i = 1; i < entries.events.length; i++) {
            let currentEvent = entries.events[i]
            
