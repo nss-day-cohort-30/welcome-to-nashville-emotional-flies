@@ -5,7 +5,6 @@ const parkSearchButton = document.querySelector("#parkSearch");
 
 parkSearchButton.addEventListener("click", (event) => {
 
-let counter = 0;
 
     // Capture user input and place it into the address to be fetched
 
@@ -21,8 +20,7 @@ let counter = 0;
         .then(parsedParks => {
             
             parsedParks.forEach(park => {
-                counter++;
-                parkName = counter + ". " + park.park_name;
+                parkName = park.park_name;
                 parkAddress = park.mapped_location_address;
                 let parkHTML = parkBuilder(park);
                 parkAdder(parkHTML);
@@ -69,18 +67,6 @@ parksEl.addEventListener("click", () => {
         let buttonClicked = event.target;
         let parkToSave = buttonClicked.previousElementSibling.textContent.split(":")[0];
         
-        // Function to build HTML representation of new itinerary item
-        const parkItineraryBuilder = (parkToSave) => {
-            return `
-            <div class="itineraryItem">Park: ${parkToSave}</div>
-            `
-        }
-
-        // Function to add new div to itinerary list
-        const parkItineraryAdder = (parkHTML) => {
-            itineraryEl.innerHTML += parkHTML;
-        }
-        
         let parkItineraryHTML = parkItineraryBuilder(parkToSave);
         parkItineraryAdder(parkItineraryHTML);
 
@@ -92,3 +78,15 @@ parksEl.addEventListener("click", () => {
 });
 
 
+
+// Function to build HTML representation of new itinerary item
+const parkItineraryBuilder = (parkToSave) => {
+    return `
+    <div class="itineraryItem">Park: ${parkToSave}</div>
+    `
+}
+
+// Function to add new div to itinerary list
+const parkItineraryAdder = (parkHTML) => {
+    itineraryEl.innerHTML += parkHTML;
+}
