@@ -58,12 +58,13 @@ const printRestaurants = restaurantHTML => {
 }
 
 //create variables that hold document elements 
-const itineraryResults = document.getElementById("itinerary")
+const itineraryResults = document.getElementById("restaurantItinerary")
 const restaurantResults = document.getElementById("restaurantResults")
 
 //adds event listener to saved buttons
 restaurantResults.addEventListener("click", (event) => {
     if (event.target.className === "save") {         //ensures that the item clicked is the save button
+        document.querySelector("#restaurantItinerary").innerHTML = "";
         let restaurantSelected = event.target;      //stores event into a variable
         let restaurantSaved = restaurantSelected.previousElementSibling.previousElementSibling.innerText.split(":")[0];
         let savedRestaurant = restaurantItineraryHTML(restaurantSaved)
@@ -84,6 +85,6 @@ const restaurantItineraryHTML = (restaurantSaved => {
 
 //adds new div with selected itinerary item to the DOM 
 const addsRestaurantToItinerary = (restaurantItineraryHTML) => {
-    itineraryResults.innerHTML += restaurantItineraryHTML; //used to be += but in order to REPLACE THE CURRENT ITINERARY set it to = for only current itinerary
+    itineraryResults.innerHTML = restaurantItineraryHTML; //used to be += but in order to REPLACE THE CURRENT ITINERARY set it to = for only current itinerary
 }
 

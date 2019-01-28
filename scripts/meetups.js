@@ -56,11 +56,12 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
 
     //Variables that links id in HTML
     const linkMeetup = document.getElementById("meetupResults")
-    const linkItineraryToHTML = document.getElementById("itinerary")
+    const linkItineraryToHTML = document.getElementById("meetupItinerary")
     
     //target save button selected using the meetup results
     meetupResults.addEventListener("click", function getEventName(event){
     if (event.target.className === "save") {  
+        document.querySelector("#meetupItinerary").innerHTML = "";
         
         //assigns the actual clicked event to the meet
         let meetUpSelected = event.target
@@ -93,6 +94,6 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
     // //Function to add to DOM itinerary
     const additineraryToDOM = (taco) => {
         //use += to continue adding on each click or use - to only selct the most recent save
-        linkItineraryToHTML.innerHTML += taco;
+        linkItineraryToHTML.innerHTML = taco;
     } 
     
