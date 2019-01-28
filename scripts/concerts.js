@@ -1,37 +1,48 @@
 // let genre = 'country'
- 
-let concertButton = document.getElementById('concertButton') 
+
+let concertButton = document.getElementById('concertButton')
 let concertInput = document.getElementById('concertsByGenre');
 
 // event Listener 
 
 
 concertButton.addEventListener('click', (event) => {
-  let genre = concertInput.value
-  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?&stateCode=TN&city=nashville&classificationName=${genre}&startDateTime=2019-01-25T06:00:00Z&endDateTime=2019-01-30T06:00:00Z&apikey=EWtvotYiyT2TazNiuuVXyFzKcOSeWxHE`)
+  let genre = concertInput.value.toLowerCase();
+
+  if (genre === "") {
+    alert("Please enter valid search criteria.")
+    return;
+  }
+
+  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?&stateCode=TN&city=nashville&classificationName=${genre}&startDateTime=2019-01-28T06:00:00Z&endDateTime=2019-01-30T06:00:00Z&apikey=EWtvotYiyT2TazNiuuVXyFzKcOSeWxHE`)
 
 
 
-  .then(response => response.json())
-  .then(entries => {
-    // console.log(entries)
-  let entriesList = entries._embedded.events;
-  //  console.log(entriesList);
-  // add if statement!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+    .then(response => response.json())
+    .then(entries => {
+      // console.log(entries)
+      let entriesList = entries._embedded.events;
+      //  console.log(entriesList);
+      // add if statement!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 
-    for (let index = 0; index < entriesList.length; index++) {
-    const currentEvent= entriesList[index];
-    //  console.log(currentEvent);
+      for (let index = 0; index < entriesList.length; index++) {
+        const currentEvent = entriesList[index];
+        //  console.log(currentEvent);
 
-    artist = currentEvent.name;
-    //  console.log(artist)
-    venue = currentEvent._embedded.venues[0].name;
-    //  console.log(venue)
-    let concertHTML = concertBuilder(currentEvent)
-    concertAdder(concertHTML);
-    }
-    
-  })
+        artist = currentEvent.name;
+        //  console.log(artist)
+        venue = currentEvent._embedded.venues[0].name;
+        //  console.log(venue)
+
+        address = currentEvent._embedded.venues[0].address.line1;
+
+
+
+        let concertHTML = concertBuilder(currentEvent)
+        concertAdder(concertHTML);
+      }
+
+    })
 })
 //
 
@@ -39,24 +50,65 @@ concertButton.addEventListener('click', (event) => {
 
 
 const concertBuilder = (entry) => {
-        return `
+  return `
         <div class="concert result">
-        <p><strong>${artist}</strong>: ${venue}</p>
+        <p><strong>${artist}</strong>: ${address}</p>
         <button class="save">Save</button>
         </div>
         `
-    }
+}
 
 
-    const concertEl = document.querySelector("#concertResults"); 
+let concertEl = document.querySelector("#concertResults");
+
+const concertAdder = (concertHTML) => {
+  concertEl.innerHTML += concertHTML;
+}
+
+
+
+
+
+const concertItinerary = document.querySelector("#itinerary");
+
+
+
+
+// function to add results to DOM
+concertEl.addEventListener("click", () => {
+  
+
+  if (event.target.className === "save") {
+
     
-    const concertAdder = (concertHTML) => {
-        concertEl.innerHTML += concertHTML;
+    let concertSaved = event.target.previousElementSibling.textContent.split(":")[0];
+
+    console.log(concertSaved);
+
+    // concert Builder to HTML
+    const concertItineraryBuiler = (concertSaved) => {
+
+      return `
+    <div class="itineraryItem"> Concert: ${concertSaved} at ${venue}</div>
+    `
     }
 
+    // adding new tag to Itinerary 
+
+   const concertItineraryHTML = (concertSaved) => {
+    itineraryEl.innerHTML += concertSaved;
+    }
+
+    let savedCon = concertItineraryBuiler(concertSaved);
+    
+    concertItineraryHTML(savedCon);
 
 
+    concertEl.innerHTML = "";
+  }
 
+
+});
 
 
 

@@ -5,6 +5,7 @@ const parkSearchButton = document.querySelector("#parkSearch");
 
 parkSearchButton.addEventListener("click", (event) => {
 
+
     // Capture user input and place it into the address to be fetched
 
     let userInputParks = document.querySelector("#parksByFeature").value.toLowerCase().replace(" ", "_");
@@ -30,6 +31,7 @@ parkSearchButton.addEventListener("click", (event) => {
     
 // Function to build HTML representation of park
 
+
 const parkBuilder = (park) => {
     return `
     <div class="park result">
@@ -47,44 +49,3 @@ const parksEl = document.querySelector("#parkResults");
 const parkAdder = (parkHTML) => {
     parksEl.innerHTML += parkHTML;
 }
-
-
-
-// Add event listener to save buttons
-// When clicked, it will send the park name to the itinerary and remove the parks results from the page
-
-const itineraryEl = document.querySelector("#itinerary");
-
-
-parksEl.addEventListener("click", () => {
-    
-    // Check that item clicked is a save button
-
-    if (event.target.className === "save") {
-    
-        let buttonClicked = event.target;
-        let parkToSave = buttonClicked.previousElementSibling.textContent.split(":")[0];
-        
-        // Function to build HTML representation of new itinerary item
-        const parkItineraryBuilder = (parkToSave) => {
-            return `
-            <div class="itineraryItem">Park: ${parkToSave}</div>
-            `
-        }
-
-        // Function to add new div to itinerary list
-        const parkItineraryAdder = (parkHTML) => {
-            itineraryEl.innerHTML += parkHTML;
-        }
-        
-        let parkItineraryHTML = parkItineraryBuilder(parkToSave);
-        parkItineraryAdder(parkItineraryHTML);
-
-        // Remove park search results
-        parksEl.innerHTML = "";
-
-    }
-
-});
-
-
