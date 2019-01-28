@@ -20,29 +20,36 @@ concertButton.addEventListener('click', (event) => {
 
     .then(response => response.json())
     .then(entries => {
-      // console.log(entries)
-      let entriesList = entries._embedded.events;
-      //  console.log(entriesList);
-      // add if statement!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+      //  console.log(entries)
+       let entriesList = entries._embedded.events;
+      // /  console.log(entriesList);
+       
+        for (let index = 0; index < entriesList.length; index++) {
+          const currentEvent = entriesList[index];
+          //  console.log(currentEvent);
 
-      for (let index = 0; index < entriesList.length; index++) {
-        const currentEvent = entriesList[index];
-        //  console.log(currentEvent);
+          artist = currentEvent.name;
+          //  console.log(artist)
+          venue = currentEvent._embedded.venues[0].name;
+          //  console.log(venue)
 
-        artist = currentEvent.name;
-        //  console.log(artist)
-        venue = currentEvent._embedded.venues[0].name;
-        //  console.log(venue)
-
-        address = currentEvent._embedded.venues[0].address.line1;
-
+          address = currentEvent._embedded.venues[0].address.line1;
 
 
-        let concertHTML = concertBuilder(currentEvent)
-        concertAdder(concertHTML);
-      }
 
+          let concertHTML = concertBuilder(currentEvent)
+          concertAdder(concertHTML);
+        }
+      
     })
+
+    // if search reveals no matches, then alert the user with the .user method. 
+
+    
+    .catch(error => {
+      alert('please select another genre')
+    })
+
 })
 //
 
@@ -76,14 +83,13 @@ const concertItinerary = document.querySelector("#itinerary");
 
 // function to add results to DOM
 concertEl.addEventListener("click", () => {
-  
+
 
   if (event.target.className === "save") {
 
-    
+
     let concertSaved = event.target.previousElementSibling.textContent.split(":")[0];
 
-    console.log(concertSaved);
 
     // concert Builder to HTML
     const concertItineraryBuiler = (concertSaved) => {
@@ -95,12 +101,12 @@ concertEl.addEventListener("click", () => {
 
     // adding new tag to Itinerary 
 
-   const concertItineraryHTML = (concertSaved) => {
-    itineraryEl.innerHTML += concertSaved;
+    const concertItineraryHTML = (concertSaved) => {
+      itineraryEl.innerHTML = concertSaved;
     }
 
     let savedCon = concertItineraryBuiler(concertSaved);
-    
+
     concertItineraryHTML(savedCon);
 
 
