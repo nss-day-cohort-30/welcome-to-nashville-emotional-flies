@@ -49,6 +49,7 @@ const parkAdder = (parkHTML) => {
 }
 
 
+
 // Add event listener to save buttons
 // When clicked, it will send the park name to the itinerary and remove the parks results from the page
 
@@ -78,8 +79,6 @@ parksEl.addEventListener("click", () => {
         
         let parkItineraryHTML = parkItineraryBuilder(parkToSave);
         parkItineraryAdder(parkItineraryHTML);
-
-        console.log(parkToSave)
 
         // Remove park search results
         parksEl.innerHTML = "";
