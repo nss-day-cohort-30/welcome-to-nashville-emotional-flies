@@ -23,7 +23,7 @@ concertButton.addEventListener('click', (event) => {
       // console.log(entries)
       let entriesList = entries._embedded.events;
       //  console.log(entriesList);
-      // add if statement!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+      
 
       for (let index = 0; index < entriesList.length; index++) {
         const currentEvent = entriesList[index];
@@ -83,7 +83,6 @@ concertEl.addEventListener("click", () => {
     
     let concertSaved = event.target.previousElementSibling.textContent.split(":")[0];
 
-    console.log(concertSaved);
 
     // concert Builder to HTML
     const concertItineraryBuiler = (concertSaved) => {
@@ -96,7 +95,7 @@ concertEl.addEventListener("click", () => {
     // adding new tag to Itinerary 
 
    const concertItineraryHTML = (concertSaved) => {
-    itineraryEl.innerHTML += concertSaved;
+    itineraryEl.innerHTML = concertSaved;
     }
 
     let savedCon = concertItineraryBuiler(concertSaved);
