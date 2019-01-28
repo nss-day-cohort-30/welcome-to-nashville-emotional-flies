@@ -3,6 +3,8 @@
 document.getElementById("meetUpsSearch").addEventListener("click", function meetUpsSearchHandlerFunction(event){
     
     let eventSearch = document.getElementById("meetUpsByTopic").value
+
+//if statement to notify user of empty search
     if (eventSearch === "") {
         alert("Please enter valid search criteria")
         return;
@@ -17,19 +19,26 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
 })
     .then(response => response.json())
     .then(entries => {
+        console.log(entries)
+        if (entries.events.length === 0) {
+            alert("No results for your search criteria")
+        }  
         
-       for (let i = 0; i < entries.events.length; i++) {
+        else{
+       for (let i = 1; i < entries.events.length; i++) {
            let currentEvent = entries.events[i]
+           
         
+        //    use only if numbers are needed with search eventName = i + ". " + currentEvent.name.text           
            eventName = currentEvent.name.text           
            eventStartDTG = currentEvent.start.local
 
         //sets the varaible and calls the function
            let meetupHTML = HTMLRepresentation(currentEvent)
-           addToDOM(meetupHTML)
-        
+           addToDOM(meetupHTML)        
            
        }
+    }
     }) 
 })
 
@@ -41,30 +50,32 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
             <button class="save">Save</button>
             </div>
             `        
-        } 
-        //add event listener to save button that save it to the itinerary
-  
+        }   
 
     //Variables that links id in HTML
     const linkMeetup = document.getElementById("meetupResults")
     const linkItineraryToHTML = document.getElementById("itinerary")
-    //target save button selected
+    
+    //target save button selected using the meetup results
     meetupResults.addEventListener("click", function getEventName(event){
     if (event.target.className === "save") {        
         let meetUpSelected = event.target
-        //selects the name of the event
+
+        //assigns the name of the event to addMeetupToitinerary
         let addMeetupToitinerary = meetUpSelected.previousSibling.previousElementSibling.firstChild.innerText
+
         // the HTMLLinkItin variable is used for the function add to dom itinerary element
-       let HTMLLinkItin = HTMLRepresentationForSelectedEvent(addMeetupToitinerary)
-       additineraryToDOM(HTMLLinkItin)
-       linkMeetup.innerHTML = "";
+        let HTMLLinkItin = HTMLRepresentationForSelectedEvent(addMeetupToitinerary)
+        additineraryToDOM(HTMLLinkItin)
+        
+        //the code below resets the search results once the save button is pressed
+        linkMeetup.innerHTML = "";
     }
         
     })
     //function for HTML representation of 
     let HTMLRepresentationForSelectedEvent = (meetupEventForHTML) => {
-        console.log(meetupEventForHTML)
-        return `
+         return `
          <div class="itinerary">
          <p>Meetup: ${meetupEventForHTML}</p>
          </div>
@@ -76,7 +87,7 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
         linkMeetup.innerHTML += meetupHTML;
     }    
     // //Function to add to DOM itinerary
-    const additineraryToDOM = (meetupHTML) => {
-        linkItineraryToHTML.innerHTML += meetupHTML;
+    const additineraryToDOM = (taco) => {
+        linkItineraryToHTML.innerHTML += taco;
     } 
-    //
+    
