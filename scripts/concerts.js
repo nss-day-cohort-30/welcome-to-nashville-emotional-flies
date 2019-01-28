@@ -7,8 +7,14 @@ let concertInput = document.getElementById('concertsByGenre');
 
 
 concertButton.addEventListener('click', (event) => {
-  let genre = concertInput.value
-  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?&stateCode=TN&city=nashville&classificationName=${genre}&startDateTime=2019-01-25T06:00:00Z&endDateTime=2019-01-30T06:00:00Z&apikey=EWtvotYiyT2TazNiuuVXyFzKcOSeWxHE`)
+  let genre = concertInput.value.toLowerCase();
+
+  if (genre === "") {
+    alert("Please enter valid search criteria.")
+    return ;
+} 
+
+  fetch(`https://app.ticketmaster.com/discovery/v2/events.json?&stateCode=TN&city=nashville&classificationName=${genre}&startDateTime=2019-01-28T06:00:00Z&endDateTime=2019-01-30T06:00:00Z&apikey=EWtvotYiyT2TazNiuuVXyFzKcOSeWxHE`)
 
 
 
