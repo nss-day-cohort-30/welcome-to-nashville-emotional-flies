@@ -18,10 +18,10 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
     .then(response => response.json())
     .then(entries => {
         
-       for (let i = 0; i < entries.events.length; i++) {
+       for (let i = 1; i < entries.events.length; i++) {
            let currentEvent = entries.events[i]
         
-           eventName = currentEvent.name.text           
+           eventName = i + ". " + currentEvent.name.text           
            eventStartDTG = currentEvent.start.local
 
         //sets the varaible and calls the function
@@ -63,8 +63,7 @@ fetch(`https://www.eventbriteapi.com/v3/events/search/?q=${eventSearch}&location
     })
     //function for HTML representation of 
     let HTMLRepresentationForSelectedEvent = (meetupEventForHTML) => {
-        console.log(meetupEventForHTML)
-        return `
+         return `
          <div class="itinerary">
          <p>Meetup: ${meetupEventForHTML}</p>
          </div>
