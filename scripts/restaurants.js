@@ -51,14 +51,29 @@ const printRestaurants = restaurantHTML => {
     document.querySelector("#restaurantResults").innerHTML += restaurantHTML
 }
 
+//create variables that hold document elements 
+const itineraryResults = document.getElementById("itinerary")
+const restaurantResults = document.getElementById("restaurantResults")
 
-if (event.target.className === "save") {
-   //adds restuarant to itenerary 
+//adds event listener to saved buttons
+restaurantResults.addEventListener("click", (event) => {
+    if (event.target.className === "save") {         //ensures that the item clicked is the save button
+        let restaurantSelected = event.target;      //stores event into a variable
+        let restaurantSaved = restaurantSelected.previousElementSibling.previousElementSibling.innerText.split(":")[0];
+        addsRestaurantToItinerary(restaurantSaved) //invokes function to print selected itinerary to DOM
+        restaurantResults.innerHTML = "";         // Removes search results
+    }
+})
 
-}
-
-const addToRestaurantItinerary (savedRestaurant) {
+// Function that builds HTML representation of new itinerary item(restaurantSaved)
+const restaurantItineraryHTML = (restaurantSaved => {
     return `
-            <div class="itineraryItem">Restaurant: ${savedRestaurant}</div>
+            <div class="itineraryItem">Restaurant: ${restaurantSaved}</div>
             `
 })
+
+//adds new div with selected itinerary item to the DOM 
+const addsRestaurantToItinerary = (restaurantItineraryHTML) => {
+    itineraryResults.innerHTML += restaurantItineraryHTML;
+}
+
