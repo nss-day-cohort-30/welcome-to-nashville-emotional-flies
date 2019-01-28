@@ -52,4 +52,13 @@ const printRestaurants = restaurantHTML => {
 }
 
 
+if (event.target.className === "save") {
+   //adds restuarant to itenerary 
 
+}
+
+const addToRestaurantItinerary (savedRestaurant) {
+    return `
+            <div class="itineraryItem">Restaurant: ${savedRestaurant}</div>
+            `
+})
